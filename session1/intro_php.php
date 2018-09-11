@@ -42,20 +42,20 @@ for($i = 1; $i < 10; $i++) {
 }
 
 echo "<br/>";
-
+// Bai Tap 1: su dung IF
 for($i = 1; $i < 40; $i++) {
-    if($i % 3 == 0) {
-        echo "<br/>";
-        echo $i;
-        echo " BA";
-    } else if ($i % 5 == 0) {
-        echo "<br/>";
-        echo $i;
-        echo " NAM";
-    } else if ($i % 15 == 0) {
+    if($i % 15 == 0) {
         echo "<br/>";
         echo $i;
         echo " Muoi Lam";
+    } else if ($i % 5 == 0) {
+        echo "<br/>";
+        echo $i;
+        echo " Nam";
+    } else if ($i % 3 == 0) {
+        echo "<br/>";
+        echo $i;
+        echo " Ba";
     } else {
         echo "<br/>";
         echo $i;
