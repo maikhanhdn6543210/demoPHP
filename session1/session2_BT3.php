@@ -13,7 +13,7 @@
     print_product($product);
     echo "<br>-------2: Add AoQuan-------<br>";
      //them mot phan tu vao mang bang array_push
-    array_push($product, 'Ao Quan');
+    array_push($product, 'AoQuan');
     print_product($product);
     echo "<br>-------3: Update BanhKeo to ThucPham-------<br>";
     $product['0'] = 'ThucPham';
