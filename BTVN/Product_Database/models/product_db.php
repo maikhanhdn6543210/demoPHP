@@ -159,7 +159,7 @@ EOT;
         $rows = mysqli_num_rows($result);
 
         if (isset($_GET['page'])) {
-            // $page = preg_replace('#[^0-9]#', '', $_GET['page']);
+            
             $page = $_GET['page'];
         } else {
             $page = 1;
