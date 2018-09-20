@@ -26,7 +26,7 @@
                     <span class="error"><?php echo $errPrice;?></span>
                 </div>
                 <div class="col-xs-3">
-                    <label for="product-price-reduce">Price Reduce</label>
+                    <label for="product-price-reduce">Discount</label>
                     <input id="product-price-reduce" type="number" name="price_reduce" class="form-control" size="60">
                     
                 </div>

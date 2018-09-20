@@ -44,10 +44,10 @@
             $checkSubmit = false;
             $errFile = "Please input file picture of product!";
         }
-        if ($checkSubmit) {
+        if ($checkSubmit) { //must be check insert right first later upload file
             // upload file
             $targetUpload = "../controllers/uploads/".$fileName;
-            var_dump($fileUpload);
+            // var_dump($fileUpload);
             move_uploaded_file($fileUpload['tmp_name'], $targetUpload);
             $datePost = date('Y-m-d', strtotime($_POST['date_post']));
             // echo $_POST['date_post'];
@@ -112,27 +112,26 @@
 
             if ($_FILES['file']['name'] == "") {
                 $query="UPDATE products SET product_name = '$product_name', product_cat_id = '$product_cat_id', 
-            product_des = '$product_des', 
-            price = '$price', 
-            price_reduce = '$price_reduce', 
-            product_quantity = '$product_quantity',
-            date_post = '$datePost'
-            WHERE product_id = '$product_id'";
+                    product_des = '$product_des', 
+                    price = '$price', 
+                    price_reduce = '$price_reduce', 
+                    product_quantity = '$product_quantity',
+                    date_post = '$datePost'
+                    WHERE product_id = '$product_id'";
             } else {
                 $fileImg = "../controllers/uploads/".get_file_name($product_id);
                 unlink($fileImg);
 
                 $query="UPDATE products SET
-            product_name = '$product_name', 
-            product_cat_id = '$product_cat_id', 
-            product_des = '$product_des', 
-            price = '$price', 
-            price_reduce = '$price_reduce', 
-            product_quantity = '$product_quantity',
-            date_post = '$datePost', 
-            product_image = '$fileName'
-            WHERE product_id = '$product_id'";
-            
+                    product_name = '$product_name', 
+                    product_cat_id = '$product_cat_id', 
+                    product_des = '$product_des', 
+                    price = '$price', 
+                    price_reduce = '$price_reduce', 
+                    product_quantity = '$product_quantity',
+                    date_post = '$datePost', 
+                    product_image = '$fileName'
+                    WHERE product_id = '$product_id'";
             }
             
             $db -> exec($query);
@@ -148,12 +147,33 @@
         } else {
             echo("Deleted $fileImg");
         }
+        insertToDeleteTable($_GET['delete_product']);
         $queryDelete = "DELETE FROM products WHERE product_id = " . $_GET['delete_product'] . " ";
         $db -> exec($queryDelete);
     }
 
-    
-    
+    function insertToDeleteTable($id)
+    {
+        global $conn;
+        $query = "SELECT * FROM products WHERE product_id = {$id}";
+        $result = mysqli_query($conn, $query);
+        while($row = mysqli_fetch_array($result)) {
+            $productId = $row['product_id'];
+            $productName = $row['product_name'];
+            $productCatId = $row['product_cat_id'];
+            $productDes = $row['product_des'];
+            $price = $row['price'];
+            $priceReduce = $row['price_reduce'];
+            $productQuantity = $row['product_quantity'];
+            $datePost = $row['date_post'];
+            $productImage = $row['product_image'];
+            $query2 = "INSERT INTO productsDelete 
+            (product_id, product_name, product_cat_id, product_des, price, price_reduce, product_quantity, date_post, product_image) VALUES 
+            ('$productId','$productName', '$productCatId', '$productDes', '$price', '$priceReduce', '$productQuantity','$datePost', '$productImage')";
+            mysqli_query($conn, $query2);
+        }
+    }
+
     function get_file_name($id)
     {
         global $db;
