@@ -61,7 +61,7 @@
                                 <td>$<?php echo $value ?></td>
                                 <td>$<?php echo $sub ?></td>
                                 <td>
-                                    <a class='btn btn-warning' href="cart.php?remove={$row['product_id']}">
+                                    <a class='btn btn-warning' href="<?php echo $_SERVER['PHP_SELF'] . '?page=shop&cart=remove&addId='. $row['id']?>">
                                         -
                                     </a>  
                 
@@ -69,7 +69,7 @@
                                         +
                                     </a>
                 
-                                    <a class='btn btn-danger' href="cart.php?delete={$row['product_id']}">
+                                    <a class='btn btn-danger' href="<?php echo $_SERVER['PHP_SELF'] . '?page=shop&cart=delete&addId='. $row['id']?>">
                                         x
                                     </a>
                                 </td>
