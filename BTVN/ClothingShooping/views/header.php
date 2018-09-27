@@ -54,9 +54,11 @@ session_start();
                 <!-- Cart Area -->
                 <div class="cart-area">
                     <?php //include('shoppingCart.php') ?>
+                    <!-- <a href="<?php // echo $_SERVER['PHP_SELF'] . '?page=shop&cart=add' ?>" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span> -->
                     <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span>
                         <?php echo $_SESSION['item_quantity'] = isset($_SESSION['item_quantity']) ? $_SESSION['item_quantity'] : 0; ?>
-                    </span></a>
+                    </span>
+                    </a>
                 </div>
             </div>
 

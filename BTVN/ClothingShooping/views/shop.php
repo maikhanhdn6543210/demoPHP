@@ -1,7 +1,13 @@
 
+<?php 
+// $products1 = new ProductModel();
+// $resultProduct = $products1->getListProduct();
 
+var_dump('abc'); 
+?>
+    
     <!-- ##### Right Side Cart Area ##### -->
-    <?php include('shoppingCart.php') ?>
+    <?php //include('shoppingCart.php') ?>
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
@@ -238,3 +244,7 @@
 
     <!-- ##### Footer Area Start ##### -->
     
+
+    <!-- ##### Right Side Cart Area ##### -->
+    <?php //include('shoppingCart.php') ?>
+    <!-- ##### Right Side Cart End ##### -->

@@ -1,10 +1,6 @@
 
-                <?php
-                    // session_start();
-                    // $product2 = new ProductModel();
-                    // $idDefault = isset($_GET['addId']) ? $_GET['addId'] : '0';
-                    // $resultCart = $product2->getProductById($idDefault);
-
+                <?php     
+                    // include('controllers/cart_controller.php');               
                     $done=false;
                 ?>
                     
@@ -27,19 +23,43 @@
                 </thead>
                 <tbody>
             <?php
-                $product2 = new ProductModel();
-                    if (isset($_GET['addId'])) {
-                        $done = true;
-                        $resultCart = $product2->getProductById($_GET['addId']);
+                    // $product2 = new ProductModel();
+                    // $cartAction = isset($_GET['cart']) ? $_GET['cart'] : '';
+                    // switch($cartAction) {
+                    //     case 'add': 
+                    //         if (isset($_GET['addId'])) {
+                    //             $done = true;
+                    //             $resultCart = $product2->getProductById($_GET['addId']);
+                                
+                    //             while ($row = mysqli_fetch_array($resultCart)) {
+                    //                 $_SESSION['product_' . $_GET['addId']] = isset($_SESSION['product_' . $_GET['addId']]) ? $_SESSION['product_' . $_GET['addId']] : 0;
+                    //                 if ($row['product_quantity'] != $_SESSION['product_' . $_GET['addId']]) {
+                    //                     $_SESSION['product_' . $_GET['addId']] += 1;
+                    //                 } else {
+        
+                    //                 }
+                    //             }
+                    //         }
+                    //         break;
+                    //     case 'remove':
+                    //         break;
+
+                    // }
+                    
+                    // $product2 = new ProductModel();
+                    // if (isset($_GET['addId'])) {
+                    //     $done = true;
+                    //     $resultCart = $product2->getProductById($_GET['addId']);
                         
-                        while ($row = mysqli_fetch_array($resultCart)) {
-                            $_SESSION['product_' . $_GET['addId']] = isset($_SESSION['product_' . $_GET['addId']]) ? $_SESSION['product_' . $_GET['addId']] : 0;
-                            if ($row['product_quantity'] != $_SESSION['product_' . $_GET['addId']]) {
-                                $_SESSION['product_' . $_GET['addId']] += 1;
-                            } else {
-                            }
-                        }
-                    }
+                    //     while ($row = mysqli_fetch_array($resultCart)) {
+                    //         $_SESSION['product_' . $_GET['addId']] = isset($_SESSION['product_' . $_GET['addId']]) ? $_SESSION['product_' . $_GET['addId']] : 0;
+                    //         if ($row['product_quantity'] != $_SESSION['product_' . $_GET['addId']]) {
+                    //             $_SESSION['product_' . $_GET['addId']] += 1;
+                    //         } else {
+
+                    //         }
+                    //     }
+                    // }
                     $total = 0;
                     $item_quantity = 0;
                     $quantity =1;
