@@ -1,42 +1,28 @@
-<?php
-    include 'models/product_db.php';
-    // include 'models/category_db.php';
-    // include 'models/database.php';
-
-    class CartController
-    {
-        public function checkRequest()
-        {
-            $cartAction = "";
+<?php 
+    
+    include('models/cartModel.php');
+    $cart = new CartModel();
+    $_SESSION['done'] = false;
+    class CartController{
+        
+        public function checkRequest($cart){
+            
+            // $_done;
             $cartAction = isset($_GET['cart']) ? $_GET['cart'] : '';
-            switch($cartAction) {
+            switch($cartAction){
                 case 'add':
-                    var_dump('abc');exit();
-                    $product2 = new ProductModel();
-                    if (isset($_GET['addId'])) {
-                        $done = true;
-                        $resultCart = $product2->getProductById($_GET['addId']);
-                        
-                        while ($row = mysqli_fetch_array($resultCart)) {
-                            $_SESSION['product_' . $_GET['addId']] = isset($_SESSION['product_' . $_GET['addId']]) ? $_SESSION['product_' . $_GET['addId']] : 0;
-                            if ($row['product_quantity'] != $_SESSION['product_' . $_GET['addId']]) {
-                                $_SESSION['product_' . $_GET['addId']] += 1;
-                            } else {
-
-                            }
-                        }
-                    }
-                    include('views/shoppingCart.php');
-                    // while ($row = mysqli_fetch_array($result)) {
-                    //     if ($row['product_quantity'] != $_SESSION['product_' . $_GET['add']]) {
-                    //         $_SESSION['product_' . $_GET['add']] += 1;
-                    //         header("Location: checkout.php");
-                    //     } else {
-                    //         set_message("We only have {$row['product_quantity']} " . $row['product_title'] . " available in store");
-                    //         header("Location: checkout.php");
-                    //     }
-                    // }
+                    $cart->add($_GET['addId']);
+                    $_SESSION['done']=true;
                     break;
+                case 'remove':
+                    $cart->remove($_GET['removeId']);
+                    $_SESSION['done']=true;
+                    break;
+                case 'delete':
+                    $cart->delete($_GET['deleteId']);
+                    $_SESSION['done']=true;
+                    break;   
             }
         }
     }
+?>

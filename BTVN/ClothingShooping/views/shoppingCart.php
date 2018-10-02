@@ -1,17 +1,17 @@
-
-                <?php     
-                    // include('controllers/cart_controller.php');               
-                    $done=false;
-                ?>
-                    
-                
-<div class="cart-bg-overlay"></div>
+<?php
+    //include('models/cartModel.php');
+    include('controllers/cart_controller.php');
+?>
+<?php
+    // $_SESSION['done']=false;
+?>
+<div class="cart-bg-overlay">
 
     <div class="right-side-cart-area">
 
         <!-- Cart Button -->
         <div class="cart-content d-flex">
-            <!-- <div class="cart-list"> -->
+            
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -22,54 +22,32 @@
                     </tr>
                 </thead>
                 <tbody>
-            <?php
-                    // $product2 = new ProductModel();
-                    // $cartAction = isset($_GET['cart']) ? $_GET['cart'] : '';
-                    // switch($cartAction) {
-                    //     case 'add': 
-                    //         if (isset($_GET['addId'])) {
-                    //             $done = true;
-                    //             $resultCart = $product2->getProductById($_GET['addId']);
-                                
-                    //             while ($row = mysqli_fetch_array($resultCart)) {
-                    //                 $_SESSION['product_' . $_GET['addId']] = isset($_SESSION['product_' . $_GET['addId']]) ? $_SESSION['product_' . $_GET['addId']] : 0;
-                    //                 if ($row['product_quantity'] != $_SESSION['product_' . $_GET['addId']]) {
-                    //                     $_SESSION['product_' . $_GET['addId']] += 1;
-                    //                 } else {
-        
-                    //                 }
-                    //             }
-                    //         }
-                    //         break;
-                    //     case 'remove':
-                    //         break;
-
+                <?php
+                    $cart = new CartModel();
+                    // $_GET['cart'] = isset($_GET['cart']) ? $_GET['cart'] : '';
+                    // if ($_GET['cart'] == 'add') {
+                    //     $cart->add($_GET['addId']);
+                    //     $_done=true;
                     // }
-                    
-                    // $product2 = new ProductModel();
-                    // if (isset($_GET['addId'])) {
-                    //     $done = true;
-                    //     $resultCart = $product2->getProductById($_GET['addId']);
-                        
-                    //     while ($row = mysqli_fetch_array($resultCart)) {
-                    //         $_SESSION['product_' . $_GET['addId']] = isset($_SESSION['product_' . $_GET['addId']]) ? $_SESSION['product_' . $_GET['addId']] : 0;
-                    //         if ($row['product_quantity'] != $_SESSION['product_' . $_GET['addId']]) {
-                    //             $_SESSION['product_' . $_GET['addId']] += 1;
-                    //         } else {
-
-                    //         }
-                    //     }
+                    // if ($_GET['cart'] == 'remove') {
+                    //     $cart->remove($_GET['removeId']);
+                    //     $_done=true;
                     // }
+                    // if ($_GET['cart'] == 'delete') {
+                    //     $cart->delete($_GET['deleteId']);
+                    //     $_done=true;
+                    // }
+                    $carController = new CartController();
+                    $carController->checkRequest($cart);
+
                     $total = 0;
                     $item_quantity = 0;
-                    $quantity =1;
+                    // $quantity =1;
                     foreach ($_SESSION as $name => $value) :
                         if ($value > 0) :
                             if (substr($name, 0, 8) == "product_") :
-                                $length = strlen($name);
-                                $id = substr($name, 8, $length);
-                                $result4 = $product2->getProductById($id);
-                                while ($row = mysqli_fetch_array($result4)) :
+                                $result = $cart->getProductInCart($name);
+                                while ($row = mysqli_fetch_array($result)) :
                                     $sub = $row['product_price'] * $value;
                                     $item_quantity += $value;
                                 ?>  
@@ -81,7 +59,7 @@
                                 <td>$<?php echo $value ?></td>
                                 <td>$<?php echo $sub ?></td>
                                 <td>
-                                    <a class='btn btn-warning' href="<?php echo $_SERVER['PHP_SELF'] . '?page=shop&cart=remove&addId='. $row['id']?>">
+                                    <a class='btn btn-warning' href="<?php echo $_SERVER['PHP_SELF'] . '?page=shop&cart=remove&removeId='. $row['id']?>">
                                         -
                                     </a>  
                 
@@ -89,15 +67,15 @@
                                         +
                                     </a>
                 
-                                    <a class='btn btn-danger' href="<?php echo $_SERVER['PHP_SELF'] . '?page=shop&cart=delete&addId='. $row['id']?>">
+                                    <a class='btn btn-danger' href="<?php echo $_SERVER['PHP_SELF'] . '?page=shop&cart=delete&deleteId='. $row['id']?>">
                                         x
                                     </a>
                                 </td>
                             </tr>
                                 <?php
-                                    $quantity++;
                                     $total += $sub;
-                                    $_SESSION['item_quantity'] = $item_quantity;  
+                                    // $_SESSION['item_total'] = $total += $sub;
+                                    $_SESSION['item_quantity'] = $item_quantity;
                                 ?>  
                                 <?php endwhile ?>
                             <?php endif ?>
@@ -112,10 +90,7 @@
                     </tr>
             </tbody>
             </table> 
-        
-
         </div>
-       
         <div class="cart-button">
             <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span><?php echo $item_quantity ?></span></a>
         </div>
@@ -124,9 +99,8 @@
 </div>
 
 <?php
-    if ($done) {
+    if ($_SESSION['done']) {
         header("Location: " . $_SERVER['PHP_SELF'] . '?page=shop');
         exit;
     }
-
 ?>

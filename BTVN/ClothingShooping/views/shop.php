@@ -1,13 +1,6 @@
 
-<?php 
-// $products1 = new ProductModel();
-// $resultProduct = $products1->getListProduct();
-
-var_dump('abc'); 
-?>
-    
     <!-- ##### Right Side Cart Area ##### -->
-    <?php //include('shoppingCart.php') ?>
+    <?php include('shoppingCart.php') ?>
     <!-- ##### Right Side Cart End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
@@ -177,10 +170,10 @@ var_dump('abc');
                         </div>
 
                         <div class="row">
-
                             <!-- Single Product -->
                             <?php 
-                            
+                                $products8 = new ProductModel();
+                                $resultProduct = $products8->getListProduct();
                                 while($row = mysqli_fetch_array($resultProduct)):
                             ?>
                             <div class="col-12 col-sm-6 col-lg-4">
@@ -217,11 +210,6 @@ var_dump('abc');
                             <?php 
                                 endwhile;
                             ?>
-
-                            
-
-                            
-
                         </div>
                     </div>
                     <!-- Pagination -->
@@ -244,7 +232,3 @@ var_dump('abc');
 
     <!-- ##### Footer Area Start ##### -->
     
-
-    <!-- ##### Right Side Cart Area ##### -->
-    <?php //include('shoppingCart.php') ?>
-    <!-- ##### Right Side Cart End ##### -->
